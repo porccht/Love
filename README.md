@@ -12,7 +12,19 @@
 </p>
 
 ---
+## 🚀 Hướng Dẫn Cài Đặt & Sử Dụng
 
+1. **Tải về kịch bản:**
+   Lưu toàn bộ mã nguồn vào một file duy nhất đặt tên là `index.html`.
+
+2. **Khởi chạy:**
+   Click đúp trực tiếp vào file `index.html` để mở trên bất kỳ trình duyệt nào (Chrome, Edge, Safari, Firefox) hoặc deploy lên GitHub Pages / Vercel / Render.
+
+3. **Mở quản trị (Admin):**
+   - Bấm vào biểu tượng ⚙️ ở góc trên bên phải.
+   - Nhập mã **PIN** quản trị để mở khóa quyền chỉnh sửa.
+
+---
 ## ✨ Tính Năng Nổi Bật
 
 - ⏳ **Đếm thời gian thời gian thực:** Cập nhật chính xác từng **Ngày, Giờ, Phút, Giây** bên nhau.
@@ -34,19 +46,7 @@
 
 ---
 
-## 🚀 Hướng Dẫn Cài Đặt & Sử Dụng
 
-1. **Tải về kịch bản:**
-   Lưu toàn bộ mã nguồn vào một file duy nhất đặt tên là `index.html`.
-
-2. **Khởi chạy:**
-   Click đúp trực tiếp vào file `index.html` để mở trên bất kỳ trình duyệt nào (Chrome, Edge, Safari, Firefox) hoặc deploy lên GitHub Pages / Vercel / Render.
-
-3. **Mở quản trị (Admin):**
-   - Bấm vào biểu tượng ⚙️ ở góc trên bên phải.
-   - Nhập mã **PIN** quản trị để mở khóa quyền chỉnh sửa.
-
----
 
 ## 👨‍💻 Thông Tin Tác Giả & Liên Hệ
 
