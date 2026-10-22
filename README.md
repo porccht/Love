@@ -1,4 +1,4 @@
-# 💖 Love Counter - Đếm Ngày Yêu Liquid Glassmorphism
+# 💖 Đếm Ngày Yêu
 
 <p align="center">
   <img src="https://img.shields.io/badge/Version-2.0.0-ff2a70?style=for-the-badge&logo=github" alt="Version">
@@ -57,7 +57,7 @@
 
 | Kênh liên hệ | Thông tin |
 | :--- | :--- |
-| 👤 **Họ & Tên** | Hoàng Thanh Long (2009) |
+| 👤 **Họ & Tên** | Hoàng Thanh Long |
 | 📘 **Facebook** | [facebook.com/htl165](https://facebook.com/htl165) |
 | 🎵 **TikTok** | [@tlongmmo](https://www.tiktok.com/@tlongmmo) |
 | ⚙️ **Lĩnh vực** | MMO, Web Automation, Browser Scripting, Telegram Bot, System Admin |
