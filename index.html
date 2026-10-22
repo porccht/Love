@@ -1,1 +1,689 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thanh Long ❤️‍🩹 Thanh Huyền - Đếm Ngày Yêu</title>
+    <!-- Tailwind CSS for utility styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Dancing+Script:wght@600;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
+    <style>
+        :root {
+            --accent-pink: #ff2a70;
+            --accent-cyan: #00f2fe;
+            --accent-purple: #9d4edd;
+            --glass-bg: rgba(20, 20, 35, 0.55);
+            --glass-border: rgba(255, 255, 255, 0.15);
+        }
+
+        * {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .font-cursive {
+            font-family: 'Dancing Script', cursive;
+        }
+
+        /* Animated Dark Liquid Gradient Background */
+        body {
+            background: linear-gradient(-45deg, #090a0f, #180e29, #2b081e, #0c1b2b);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+            min-height: 100vh;
+            overflow-x: hidden;
+            color: #ffffff;
+        }
+
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Glassmorphism Card Style */
+        .glass-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5),
+                        inset 0 1px 1px rgba(255, 255, 255, 0.2);
+        }
+
+        .glass-pill {
+            background: rgba(255, 255, 255, 0.06);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+        }
+
+        /* Glowing Effects */
+        .glow-pink {
+            box-shadow: 0 0 25px rgba(255, 42, 112, 0.5);
+        }
+
+        .glow-cyan {
+            box-shadow: 0 0 25px rgba(0, 242, 254, 0.4);
+        }
+
+        .glow-text-pink {
+            text-shadow: 0 0 15px rgba(255, 42, 112, 0.6);
+        }
+
+        /* Heart Pulse Animation */
+        .heart-pulse {
+            animation: heartbeat 1.3s infinite ease-in-out;
+        }
+
+        @keyframes heartbeat {
+            0% { transform: scale(1); }
+            14% { transform: scale(1.25); }
+            28% { transform: scale(1); }
+            42% { transform: scale(1.25); }
+            70% { transform: scale(1); }
+        }
+
+        /* Canvas Overlay for Floating Hearts */
+        #particleCanvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        /* Custom Scrollbar for Modal */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: rgba(0, 0, 0, 0.2);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body class="flex items-center justify-center min-h-screen p-4 relative">
+
+    <!-- Particle Background Canvas -->
+    <canvas id="particleCanvas"></canvas>
+
+    <!-- Top Floating Actions (Settings & Lock Indicator) -->
+    <div class="fixed top-4 right-4 z-30 flex items-center gap-3">
+        <span id="lockBadge" class="glass-pill px-3 py-1.5 rounded-full text-xs font-semibold text-emerald-400 flex items-center gap-2 border border-emerald-500/30">
+            <i class="fa-solid fa-lock"></i>
+        </span>
+        <button id="openAdminBtn" title="Cài đặt Admin" class="glass-pill w-10 h-10 rounded-full flex items-center justify-center text-white hover:text-pink-400 transition-all hover:scale-110 active:scale-95 shadow-lg">
+            <i class="fa-solid fa-gear text-lg"></i>
+        </button>
+    </div>
+
+    <!-- Main Container -->
+    <main class="relative z-10 w-full max-w-lg my-auto">
+        <div class="glass-card rounded-3xl p-6 md:p-8 text-center relative overflow-hidden">
+            
+            <!-- Ambient Decorative Lights -->
+            <div class="absolute -top-24 -left-24 w-48 h-48 bg-pink-500/30 rounded-full blur-3xl pointer-events-none"></div>
+            <div class="absolute -bottom-24 -right-24 w-48 h-48 bg-cyan-500/20 rounded-full blur-3xl pointer-events-none"></div>
+
+            <!-- Header Title -->
+            <div class="inline-flex items-center gap-2 glass-pill px-4 py-1.5 rounded-full mb-6">
+                <i class="fa-solid fa-sparkles text-amber-300 text-xs"></i>
+                <span class="text-xs font-bold tracking-widest text-pink-300 uppercase">Hành Trình Tình Yêu</span>
+                <i class="fa-solid fa-sparkles text-amber-300 text-xs"></i>
+            </div>
+
+            <!-- Profile Avatars Section -->
+            <div class="flex items-center justify-center gap-2 md:gap-6 mb-8">
+                <!-- Nam Profile (Thanh Long) -->
+                <div class="flex flex-col items-center group min-w-[130px] sm:min-w-[150px]">
+                    <div class="relative mb-3">
+                        <img id="displayAvatarNam" 
+                             src="https://raw.githubusercontent.com/porccht/Love/main/Thanh%20Long%20Thanh%20Huy%E1%BB%81n/thanhlong.png" 
+                             alt="Thanh Long"
+                             class="w-24 h-24 md:w-28 md:h-28 rounded-full object-cover border-2 border-cyan-400/90 glow-cyan transition-transform duration-300 group-hover:scale-105"
+                             onerror="this.src='https://placehold.co/200x200/1a2a3a/ffffff?text=Thanh+Long'">
+                        <span class="absolute bottom-0 right-1 bg-cyan-600 text-white p-1.5 rounded-full text-xs shadow-md">
+                            <i class="fa-solid fa-mars"></i>
+                        </span>
+                    </div>
+                    <h2 id="displayNameNam" class="font-bold text-sm sm:text-base md:text-lg text-white text-center leading-snug break-words">
+                        Thanh Long ❤️‍🩹
+                    </h2>
+                </div>
+
+                <!-- Heart Icon Beats (❤️‍🩹) -->
+                <div class="flex flex-col items-center justify-center px-1 sm:px-3">
+                    <div class="text-3xl md:text-4xl heart-pulse drop-shadow-[0_0_15px_rgba(255,42,112,0.8)] select-none">
+                        ❤️‍🩹
+                    </div>
+                    <span class="text-[10px] uppercase font-bold tracking-wider text-pink-300 mt-1">Loves</span>
+                </div>
+
+                <!-- Nu Profile (Thanh Huyền) -->
+                <div class="flex flex-col items-center group min-w-[130px] sm:min-w-[150px]">
+                    <div class="relative mb-3">
+                        <img id="displayAvatarNu" 
+                             src="https://raw.githubusercontent.com/porccht/Love/main/Thanh%20Long%20Thanh%20Huy%E1%BB%81n/thanhhuyen.png" 
+                             alt="Thanh Huyền"
+                             class="w-24 h-24 md:w-28 md:h-28 rounded-full object-cover border-2 border-pink-500/90 glow-pink transition-transform duration-300 group-hover:scale-105"
+                             onerror="this.src='https://placehold.co/200x200/2a1a3a/ffffff?text=Thanh+Huy%E1%BB%81n'">
+                        <span class="absolute bottom-0 right-1 bg-pink-600 text-white p-1.5 rounded-full text-xs shadow-md">
+                            <i class="fa-solid fa-venus"></i>
+                        </span>
+                    </div>
+                    <h2 id="displayNameNu" class="font-bold text-sm sm:text-base md:text-lg text-white text-center leading-snug break-words">
+                        Thanh Huyền ❤️‍🩹
+                    </h2>
+                </div>
+            </div>
+
+            <!-- Big Days Count Box -->
+            <div class="glass-pill rounded-2xl p-6 mb-6 relative overflow-hidden border border-pink-500/20">
+                <div class="text-xs uppercase font-semibold text-gray-300 tracking-wider mb-1">Chúng mình đã bên nhau</div>
+                <div class="flex items-baseline justify-center gap-2 my-2">
+                    <span id="countDays" class="text-5xl md:text-6xl font-extrabold bg-clip-text text-transparent bg-gradient-to-r from-pink-400 via-rose-300 to-amber-200 glow-text-pink">
+                        0
+                    </span>
+                    <span class="text-xl font-bold text-pink-300">NGÀY</span>
+                </div>
+                <div id="startDateSubtitle" class="text-xs text-pink-200/70 font-medium">
+                    Kể từ ngày: <span id="displayStartDate">29/07/2026</span>
+                </div>
+            </div>
+
+            <!-- Time Details Grid (Hours, Minutes, Seconds) -->
+            <div class="grid grid-cols-3 gap-3 mb-6">
+                <div class="glass-pill p-3 rounded-xl flex flex-col items-center">
+                    <span id="countHours" class="text-2xl font-bold text-cyan-300">00</span>
+                    <span class="text-[11px] text-gray-400 uppercase font-medium mt-0.5">Giờ</span>
+                </div>
+                <div class="glass-pill p-3 rounded-xl flex flex-col items-center">
+                    <span id="countMinutes" class="text-2xl font-bold text-purple-300">00</span>
+                    <span class="text-[11px] text-gray-400 uppercase font-medium mt-0.5">Phút</span>
+                </div>
+                <div class="glass-pill p-3 rounded-xl flex flex-col items-center">
+                    <span id="countSeconds" class="text-2xl font-bold text-pink-400">00</span>
+                    <span class="text-[11px] text-gray-400 uppercase font-medium mt-0.5">Giây</span>
+                </div>
+            </div>
+
+            <!-- Love Quote / Calendar Daily Quote -->
+            <div class="glass-pill rounded-2xl p-4 border border-pink-500/10 relative">
+                <div class="text-[10px] uppercase font-bold tracking-widest text-amber-300/80 mb-1 flex items-center justify-center gap-1">
+                    <i class="fa-regular fa-calendar-heart"></i> Thông Điệp Hôm Nay
+                </div>
+                <p id="loveQuote" class="font-cursive text-xl md:text-2xl text-pink-200/95 leading-relaxed px-2">
+                    "Cùng nhau đi qua bão giông, để đổi lấy những ngày nắng đẹp."
+                </p>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Admin & Settings Modal -->
+    <div id="adminModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-md hidden transition-opacity duration-300">
+        <div class="glass-card w-full max-w-md rounded-3xl p-6 relative max-h-[90vh] overflow-y-auto border border-pink-500/30">
+            
+            <!-- Close Modal Button -->
+            <button id="closeAdminBtn" class="absolute top-4 right-4 text-gray-400 hover:text-white text-xl w-8 h-8 rounded-full glass-pill flex items-center justify-center">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+
+            <!-- Modal Header -->
+            <div class="flex items-center gap-3 mb-6 pb-3 border-b border-white/10">
+                <div class="w-10 h-10 rounded-xl bg-pink-500/20 flex items-center justify-center text-pink-400 text-lg">
+                    <i class="fa-solid fa-sliders"></i>
+                </div>
+                <div>
+                    <h3 class="font-bold text-lg text-white">Quản Lý & Cài Đặt</h3>
+                    <p class="text-xs text-gray-400">Dành riêng cho Thanh Long ❤️‍🩹</p>
+                </div>
+            </div>
+
+            <!-- Passcode Verification Screen -->
+            <div id="authBox" class="space-y-4 mb-6">
+                <div class="p-4 rounded-xl bg-pink-500/10 border border-pink-500/20 text-center">
+                    <i class="fa-solid fa-shield-halved text-2xl text-pink-400 mb-2"></i>
+                    <p class="text-xs text-gray-300">Nhập mã PIN để mở khóa chỉnh sửa</p>
+                </div>
+                <div>
+                    <input type="password" id="pinInput" placeholder="Mã PIN..." 
+                           class="w-full glass-pill px-4 py-3 rounded-xl text-center text-lg tracking-widest outline-none focus:border-pink-500 transition-all text-white">
+                </div>
+                <button id="verifyPinBtn" class="w-full py-3 bg-gradient-to-r from-pink-500 to-purple-600 rounded-xl font-bold text-white shadow-lg hover:opacity-90 active:scale-[0.98] transition-all">
+                    Xác Nhận Đăng Nhập
+                </button>
+            </div>
+
+            <!-- Settings Form (Hidden until authenticated) -->
+            <form id="settingsForm" class="space-y-4 hidden">
+                
+                <!-- Ngày kỷ niệm -->
+                <div>
+                    <label class="block text-xs font-semibold text-gray-300 mb-1.5">Ngày Bắt Đầu Yêu</label>
+                    <input type="date" id="inputStartDate" 
+                           class="w-full glass-pill px-4 py-2.5 rounded-xl text-white outline-none focus:border-pink-500 transition-all">
+                </div>
+
+                <!-- Tên Nam -->
+                <div>
+                    <label class="block text-xs font-semibold text-gray-300 mb-1.5">Tên Bạn Nam</label>
+                    <input type="text" id="inputNameNam" placeholder="Thanh Long ❤️‍🩹"
+                           class="w-full glass-pill px-4 py-2.5 rounded-xl text-white outline-none focus:border-pink-500 transition-all">
+                </div>
+
+                <!-- Link Ảnh Avatar Nam -->
+                <div>
+                    <label class="block text-xs font-semibold text-gray-300 mb-1.5">Ảnh Đại Diện Nam (Link)</label>
+                    <input type="url" id="inputAvatarNam" placeholder="Dán link ảnh..."
+                           class="w-full glass-pill px-4 py-2.5 rounded-xl text-white text-xs outline-none focus:border-pink-500 transition-all">
+                </div>
+
+                <!-- Tên Nữ -->
+                <div>
+                    <label class="block text-xs font-semibold text-gray-300 mb-1.5">Tên Bạn Nữ</label>
+                    <input type="text" id="inputNameNu" placeholder="Thanh Huyền ❤️‍🩹"
+                           class="w-full glass-pill px-4 py-2.5 rounded-xl text-white outline-none focus:border-pink-500 transition-all">
+                </div>
+
+                <!-- Link Ảnh Avatar Nữ -->
+                <div>
+                    <label class="block text-xs font-semibold text-gray-300 mb-1.5">Ảnh Đại Diện Nữ (Link)</label>
+                    <input type="url" id="inputAvatarNu" placeholder="Dán link ảnh..."
+                           class="w-full glass-pill px-4 py-2.5 rounded-xl text-white text-xs outline-none focus:border-pink-500 transition-all">
+                </div>
+
+                <!-- Chế độ Quote Lịch / Tùy Chỉnh -->
+                <div>
+                    <label class="block text-xs font-semibold text-gray-300 mb-1.5">Chế Độ Thông Điệp</label>
+                    <select id="selectQuoteMode" class="w-full glass-pill px-4 py-2.5 rounded-xl text-white text-xs outline-none focus:border-pink-500 transition-all bg-slate-900">
+                        <option value="auto">Tự động đổi câu hay mỗi ngày (Nhà lịch tình yêu)</option>
+                        <option value="custom">Tùy chỉnh câu cố định</option>
+                    </select>
+                </div>
+
+                <!-- Quote / Lời Nhắn Tùy Chỉnh -->
+                <div id="customQuoteWrap">
+                    <label class="block text-xs font-semibold text-gray-300 mb-1.5">Câu Nói Tùy Chỉnh</label>
+                    <textarea id="inputQuote" rows="2" placeholder="Nhập câu nói ngọt ngào..."
+                              class="w-full glass-pill px-4 py-2.5 rounded-xl text-white text-sm outline-none focus:border-pink-500 transition-all resize-none"></textarea>
+                </div>
+
+                <!-- Change PIN -->
+                <div>
+                    <label class="block text-xs font-semibold text-gray-300 mb-1.5">Đổi Mã PIN Mới</label>
+                    <input type="password" id="inputNewPin" placeholder="Để trống nếu không đổi..."
+                           class="w-full glass-pill px-4 py-2.5 rounded-xl text-white outline-none focus:border-pink-500 transition-all">
+                </div>
+
+                <!-- Form Action Buttons -->
+                <div class="pt-2 space-y-2">
+                    <button type="submit" class="w-full py-3 bg-gradient-to-r from-pink-500 to-rose-500 rounded-xl font-bold text-white shadow-lg hover:opacity-90 active:scale-[0.98] transition-all">
+                        <i class="fa-solid fa-floppy-disk mr-2"></i> Lưu Thay Đổi
+                    </button>
+                    
+                    <button type="button" id="resetDefaultBtn" class="w-full py-2.5 glass-pill rounded-xl text-xs font-semibold text-amber-300 hover:bg-amber-500/20 transition-all">
+                        <i class="fa-solid fa-rotate-left mr-1.5"></i> Khôi Phục Mặc Định
+                    </button>
+                </div>
+            </form>
+
+        </div>
+    </div>
+
+    <!-- Notification Toast -->
+    <div id="toast" class="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 glass-pill px-5 py-2.5 rounded-full text-xs font-semibold text-white shadow-2xl opacity-0 pointer-events-none transition-all duration-300 border border-pink-500/40 flex items-center gap-2">
+        <i class="fa-solid fa-circle-check text-pink-400"></i>
+        <span id="toastMsg">Thành công!</span>
+    </div>
+
+    <script>
+        /* ==========================================================================
+           DANH SÁCH CÁC CÂU QUOTE LỊCH TÌNH YÊU (TỰ ĐỘNG THAY ĐỔI THEO NGÀY)
+           ========================================================================== */
+        const DAILY_QUOTES = [
+            '"Cùng nhau đi qua bão giông, để đổi lấy những ngày nắng đẹp."',
+            '"Thế giới này rộng lớn như vậy, nhưng trong mắt anh chỉ có em."',
+            '"Gặp được em là điều may mắn nhất trong cuộc đời anh."',
+            '"Yêu không phải là nhìn nhau, mà là cùng nhìn về một hướng."',
+            '"Mỗi ngày trôi qua bên em đều là một ngày đặc biệt."',
+            '"Anh không hứa cùng em đi hết cuộc đời, nhưng hứa sẽ thương em hết lòng."',
+            '"Cảm ơn vì đã đến và làm cho thế giới của anh trở nên rực rỡ."',
+            '"Dù ngoài kia có bao nhiêu bão tố, nắm tay em là anh thấy yên bình."',
+            '"Chỉ cần là em, muộn một chút cũng không sao."',
+            '"Nụ cười của em là ánh nắng đẹp nhất mà anh từng thấy."',
+            '"Yêu em là quyết định đúng đắn và ngọt ngào nhất của anh."',
+            '"Những ngày có em luôn là những ngày nhiều niềm vui nhất."',
+            '"Nhìn thấy em hạnh phúc chính là điều anh luôn cố gắng mỗi ngày."',
+            '"Cùng nhau già đi nhé, từ khi còn trẻ cho tới lúc bạc đầu."',
+            '"Mỗi khoảnh khắc bên em đều trở thành ký ức vô giá."',
+            '"Tình yêu không cần quá phô trương, chỉ cần hai ta luôn thấu hiểu."',
+            '"Mỗi sáng thức dậy biết mình có nhau, đó là hạnh phúc tuyệt vời."',
+            '"Có em bên cạnh, anh có thêm lý do để phấn đấu mỗi ngày."',
+            '"Dù đường đời nhiều chông gai, chỉ cần nắm chặt tay nhau là đủ."',
+            '"Em chính là mảnh ghép hoàn hảo mà cuộc đời anh còn thiếu."',
+            '"Thời gian trôi qua, nhưng tình cảm anh dành cho em vẫn trọn vẹn như ban đầu."'
+        ];
+
+        /* ==========================================================================
+           DEFAULT CONSTANTS (DỮ LIỆU MẶC ĐỊNH SỬ DỤNG PIN 1011)
+           ========================================================================== */
+        const DEFAULTS = {
+            nameNam: "Thanh Long ❤️‍🩹",
+            avatarNam: "https://raw.githubusercontent.com/porccht/Love/main/Thanh%20Long%20Thanh%20Huy%E1%BB%81n/thanhlong.png",
+            nameNu: "Thanh Huyền ❤️‍🩹",
+            avatarNu: "https://raw.githubusercontent.com/porccht/Love/main/Thanh%20Long%20Thanh%20Huy%E1%BB%81n/thanhhuyen.png",
+            startDate: "2026-07-29",
+            quoteMode: "auto",
+            customQuote: '"Cùng nhau đi qua bão giông, để đổi lấy những ngày nắng đẹp."',
+            pin: "1011"
+        };
+
+        /* LẤY VÀ ĐỒNG BỘ TRẠNG THÁI LƯU TRỮ */
+        let appState = {
+            nameNam: localStorage.getItem('love_name_nam') || DEFAULTS.nameNam,
+            avatarNam: localStorage.getItem('love_avatar_nam') || DEFAULTS.avatarNam,
+            nameNu: localStorage.getItem('love_name_nu') || DEFAULTS.nameNu,
+            avatarNu: localStorage.getItem('love_avatar_nu') || DEFAULTS.avatarNu,
+            startDate: localStorage.getItem('love_start_date') || DEFAULTS.startDate,
+            quoteMode: localStorage.getItem('love_quote_mode') || DEFAULTS.quoteMode,
+            customQuote: localStorage.getItem('love_custom_quote') || DEFAULTS.customQuote,
+            pin: localStorage.getItem('love_pin') || DEFAULTS.pin
+        };
+
+        // Ép mã PIN về mặc định nếu chưa lưu mã PIN tùy chỉnh hoặc dính cache cũ
+        if (!localStorage.getItem('love_pin')) {
+            appState.pin = DEFAULTS.pin;
+            localStorage.setItem('love_pin', DEFAULTS.pin);
+        }
+
+        let isUnlocked = false;
+
+        /* Hàm lấy câu quote theo ngày (như tờ lịch) */
+        function getTodayQuote() {
+            if (appState.quoteMode === 'custom' && appState.customQuote.trim() !== '') {
+                return appState.customQuote;
+            }
+            // Thuật toán tính chỉ số câu theo ngày trong năm
+            const now = new Date();
+            const startOfYear = new Date(now.getFullYear(), 0, 0);
+            const diff = now - startOfYear;
+            const oneDay = 1000 * 60 * 60 * 24;
+            const dayOfYear = Math.floor(diff / oneDay);
+            
+            const index = dayOfYear % DAILY_QUOTES.length;
+            return DAILY_QUOTES[index];
+        }
+
+        /* Helper: Chuyển đổi link github blob sang raw nếu dán nhầm */
+        function fixGithubRawUrl(url) {
+            if (!url) return '';
+            if (url.includes('github.com') && url.includes('/blob/')) {
+                return url.replace('github.com', 'raw.githubusercontent.com').replace('/blob/', '/');
+            }
+            return url;
+        }
+
+        /* Helper: Hiển thị Thông báo Toast */
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            const toastMsg = document.getElementById('toastMsg');
+            toastMsg.textContent = message;
+            toast.classList.remove('opacity-0', 'pointer-events-none');
+            setTimeout(() => {
+                toast.classList.add('opacity-0', 'pointer-events-none');
+            }, 3000);
+        }
+
+        /* Cập nhật toàn bộ Giao diện */
+        function renderUI() {
+            document.getElementById('displayNameNam').textContent = appState.nameNam;
+            document.getElementById('displayAvatarNam').src = fixGithubRawUrl(appState.avatarNam);
+            
+            document.getElementById('displayNameNu').textContent = appState.nameNu;
+            document.getElementById('displayAvatarNu').src = fixGithubRawUrl(appState.avatarNu);
+            
+            // Cập nhật Quote
+            document.getElementById('loveQuote').textContent = getTodayQuote();
+
+            // Hiển thị định dạng ngày (DD/MM/YYYY)
+            const dateParts = appState.startDate.split('-');
+            if(dateParts.length === 3) {
+                document.getElementById('displayStartDate').textContent = `${dateParts[2]}/${dateParts[1]}/${dateParts[0]}`;
+            }
+
+            updateLoveCounter();
+        }
+
+        /* Tính toán Đếm Ngày / Giờ / Phút / Giây */
+        function updateLoveCounter() {
+            const start = new Date(appState.startDate + 'T00:00:00');
+            const now = new Date();
+            const diffMs = now - start;
+
+            if (isNaN(diffMs) || diffMs < 0) {
+                document.getElementById('countDays').textContent = '0';
+                document.getElementById('countHours').textContent = '00';
+                document.getElementById('countMinutes').textContent = '00';
+                document.getElementById('countSeconds').textContent = '00';
+                return;
+            }
+
+            const totalSeconds = Math.floor(diffMs / 1000);
+            const days = Math.floor(totalSeconds / (3600 * 24));
+            const hours = Math.floor((totalSeconds % (3600 * 24)) / 3600);
+            const minutes = Math.floor((totalSeconds % 3600) / 60);
+            const seconds = totalSeconds % 60;
+
+            document.getElementById('countDays').textContent = days.toLocaleString();
+            document.getElementById('countHours').textContent = hours < 10 ? '0' + hours : hours;
+            document.getElementById('countMinutes').textContent = minutes < 10 ? '0' + minutes : minutes;
+            document.getElementById('countSeconds').textContent = seconds < 10 ? '0' + seconds : seconds;
+        }
+
+        /* Xử lý Modal Admin */
+        const adminModal = document.getElementById('adminModal');
+        const openAdminBtn = document.getElementById('openAdminBtn');
+        const closeAdminBtn = document.getElementById('closeAdminBtn');
+        const authBox = document.getElementById('authBox');
+        const settingsForm = document.getElementById('settingsForm');
+        const verifyPinBtn = document.getElementById('verifyPinBtn');
+        const pinInput = document.getElementById('pinInput');
+        const selectQuoteMode = document.getElementById('selectQuoteMode');
+        const customQuoteWrap = document.getElementById('customQuoteWrap');
+
+        openAdminBtn.addEventListener('click', () => {
+            adminModal.classList.remove('hidden');
+            if (isUnlocked) {
+                showSettingsForm();
+            } else {
+                authBox.classList.remove('hidden');
+                settingsForm.classList.add('hidden');
+                pinInput.value = '';
+                pinInput.focus();
+            }
+        });
+
+        closeAdminBtn.addEventListener('click', () => {
+            adminModal.classList.add('hidden');
+        });
+
+        adminModal.addEventListener('click', (e) => {
+            if (e.target === adminModal) adminModal.classList.add('hidden');
+        });
+
+        /* Xác nhận Mã PIN */
+        verifyPinBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            const inputVal = pinInput.value.trim();
+            // So sánh mã nhập vào với PIN lưu trong appState hoặc PIN mặc định 1011
+            if (inputVal === appState.pin || inputVal === DEFAULTS.pin) {
+                isUnlocked = true;
+                appState.pin = inputVal;
+                localStorage.setItem('love_pin', inputVal);
+                showSettingsForm();
+                showToast('Đã mở khóa quyền quản trị!');
+            } else {
+                showToast('Mã PIN không đúng!');
+                pinInput.classList.add('border-red-500');
+                setTimeout(() => pinInput.classList.remove('border-red-500'), 1000);
+            }
+        });
+
+        selectQuoteMode.addEventListener('change', (e) => {
+            if(e.target.value === 'custom') {
+                customQuoteWrap.classList.remove('hidden');
+            } else {
+                customQuoteWrap.classList.add('hidden');
+            }
+        });
+
+        function showSettingsForm() {
+            authBox.classList.add('hidden');
+            settingsForm.classList.remove('hidden');
+
+            // Điền thông tin hiện tại vào Form
+            document.getElementById('inputStartDate').value = appState.startDate;
+            document.getElementById('inputNameNam').value = appState.nameNam;
+            document.getElementById('inputAvatarNam').value = appState.avatarNam;
+            document.getElementById('inputNameNu').value = appState.nameNu;
+            document.getElementById('inputAvatarNu').value = appState.avatarNu;
+            document.getElementById('selectQuoteMode').value = appState.quoteMode;
+            document.getElementById('inputQuote').value = appState.customQuote;
+            document.getElementById('inputNewPin').value = '';
+
+            if(appState.quoteMode === 'custom') {
+                customQuoteWrap.classList.remove('hidden');
+            } else {
+                customQuoteWrap.classList.add('hidden');
+            }
+        }
+
+        /* Lưu Cài Đặt */
+        settingsForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+
+            appState.startDate = document.getElementById('inputStartDate').value || DEFAULTS.startDate;
+            appState.nameNam = document.getElementById('inputNameNam').value.trim() || DEFAULTS.nameNam;
+            appState.avatarNam = fixGithubRawUrl(document.getElementById('inputAvatarNam').value.trim()) || DEFAULTS.avatarNam;
+            appState.nameNu = document.getElementById('inputNameNu').value.trim() || DEFAULTS.nameNu;
+            appState.avatarNu = fixGithubRawUrl(document.getElementById('inputAvatarNu').value.trim()) || DEFAULTS.avatarNu;
+            appState.quoteMode = document.getElementById('selectQuoteMode').value;
+            appState.customQuote = document.getElementById('inputQuote').value.trim() || DEFAULTS.customQuote;
+
+            const newPin = document.getElementById('inputNewPin').value.trim();
+            if (newPin.length > 0) {
+                appState.pin = newPin;
+                localStorage.setItem('love_pin', newPin);
+            }
+
+            // Lưu vào LocalStorage
+            localStorage.setItem('love_start_date', appState.startDate);
+            localStorage.setItem('love_name_nam', appState.nameNam);
+            localStorage.setItem('love_avatar_nam', appState.avatarNam);
+            localStorage.setItem('love_name_nu', appState.nameNu);
+            localStorage.setItem('love_avatar_nu', appState.avatarNu);
+            localStorage.setItem('love_quote_mode', appState.quoteMode);
+            localStorage.setItem('love_custom_quote', appState.customQuote);
+
+            renderUI();
+            adminModal.classList.add('hidden');
+            showToast('Đã lưu thông tin kỷ niệm!');
+        });
+
+        /* Khôi phục Mặc Định */
+        document.getElementById('resetDefaultBtn').addEventListener('click', () => {
+            if (confirm('Khôi phục lại dữ liệu mặc định?')) {
+                localStorage.clear();
+                appState = { ...DEFAULTS };
+                localStorage.setItem('love_pin', DEFAULTS.pin);
+                renderUI();
+                showSettingsForm();
+                showToast('Đã khôi phục cài đặt gốc!');
+            }
+        });
+
+        /* ==========================================================================
+           HIỆU ỨNG TRÁI TIM BAY TRÊN CANVAS
+           ========================================================================== */
+        const canvas = document.getElementById('particleCanvas');
+        const ctx = canvas.getContext('2d');
+        let particles = [];
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+
+        class Particle {
+            constructor() {
+                this.reset();
+            }
+
+            reset() {
+                this.x = Math.random() * canvas.width;
+                this.y = canvas.height + Math.random() * 20;
+                this.size = Math.random() * 14 + 8;
+                this.speedY = Math.random() * 1.2 + 0.5;
+                this.speedX = Math.sin(Math.random() * Math.PI) * 0.5;
+                this.opacity = Math.random() * 0.6 + 0.2;
+                this.color = Math.random() > 0.4 ? '#ff2a70' : '#00f2fe';
+            }
+
+            update() {
+                this.y -= this.speedY;
+                this.x += Math.sin(this.y * 0.01) * 0.6;
+                if (this.y < -20) {
+                    this.reset();
+                }
+            }
+
+            draw() {
+                ctx.save();
+                ctx.globalAlpha = this.opacity;
+                ctx.fillStyle = this.color;
+                ctx.font = `${this.size}px FontAwesome`;
+                ctx.fillText('♥', this.x, this.y);
+                ctx.restore();
+            }
+        }
+
+        function initParticles() {
+            particles = [];
+            const count = Math.min(Math.floor(window.innerWidth / 25), 35);
+            for (let i = 0; i < count; i++) {
+                particles.push(new Particle());
+            }
+        }
+
+        function animateParticles() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            particles.forEach(p => {
+                p.update();
+                p.draw();
+            });
+            requestAnimationFrame(animateParticles);
+        }
+
+        /* Khởi tạo ứng dụng */
+        window.onload = function() {
+            renderUI();
+            setInterval(updateLoveCounter, 1000);
+            initParticles();
+            animateParticles();
+        };
+    </script>
+</body>
+</html>
